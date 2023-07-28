@@ -8,8 +8,8 @@
     },
     "MainSetup" : {
         "AppEnv" : "Local",
-        "ServiceName" : "Loan",
-        "ServiceType" : "Process",
+        "ServiceName" : "Auth JWT",
+        "ServiceType" : "Api",
         "ServerHost" : "0.0.0.0:8901",
         "Maxprocs" : "6",
         "AppsDebug" : "debug",
