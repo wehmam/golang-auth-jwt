@@ -1,0 +1,42 @@
+{
+    "Version" : {
+        "ReleaseVersion" : "V1.0",
+        "TeamCreated" : "wehmamxx",
+        "VersionType" : "DEV",
+        "BranchName" : "dev",
+        "Notes" : "wehmamxx learn golang"
+    },
+    "MainSetup" : {
+        "AppEnv" : "Local",
+        "ServiceName" : "Loan",
+        "ServiceType" : "Process",
+        "ServerHost" : "0.0.0.0:8901",
+        "Maxprocs" : "6",
+        "AppsDebug" : "debug",
+        "PrefixCode" : ""
+    },
+    "Database" :{
+        "Prefix" : "",
+        "SingularTable" : "true",
+        "IgnoreErrorNotFound" : "false",
+        "Color" : "true"
+    },
+    "InternalRouting" : {
+        "Base" : "api",
+        "V1" : {
+            "Prefix" : "v1",
+            "GetUser": {
+                "Prefix" : "/",
+                "Send" : "/users"
+            },
+            "AddUser" : {
+                "Prefix" : "/",
+                "Send" : "/users"
+            },
+            "LoginUser" : {
+                "Prefix" : "/",
+                "Send" : "/login"
+            }
+        }
+    }
+}
