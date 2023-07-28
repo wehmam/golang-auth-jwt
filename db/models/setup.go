@@ -5,6 +5,8 @@ import (
 	"log"
 	"os"
 	"time"
+
+	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -14,18 +16,15 @@ import (
 var DB *gorm.DB
 
 func Connect() {
-	var err error 
+	var err error
+	godotenv.Load(".env")
 	database, err := Postgresql()
 	if err != nil {
-		log.Fatal("failed to connect database: " , err)
-		return 
+		log.Fatal("failed to connect database: ", err)
+		return
 	}
 
 	DB = database
-	// dbSQL, ok := DB.DB()
-	// if ok != nil {
-	// 	defer dbSQL.Close()
-	// }
 }
 
 func Postgresql() (*gorm.DB, error) {
@@ -41,20 +40,19 @@ func Postgresql() (*gorm.DB, error) {
 		Logger: logger.New(
 			log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
 			logger.Config{
-				SlowThreshold: time.Second,                      // Slow SQL threshold
-				LogLevel:      logger.Info,                      // Log level
-				Colorful:      true, // Disable color
+				SlowThreshold: time.Second, // Slow SQL threshold
+				LogLevel:      logger.Info, // Log level
+				Colorful:      true,        // Disable color
 			},
 		),
 	})
 }
 
 func dsn() string {
-	host := "host=127.0.0.1"
-	port := "port=5432"
-	dbname := "dbname=auth"
-	user := "user=postgres"
-	password := "password=admin"
-
+	host := "host=" + os.Getenv("POSTGRES_HOST")
+	port := "port=" + os.Getenv("POSTGRES_PORT")
+	dbname := "dbname=" + os.Getenv("POSTGRES_DBNAME")
+	user := "user=" + os.Getenv("POSTGRES_USER")
+	password := "password=" + os.Getenv("POSTGRES_PASSWORD")
 	return fmt.Sprintln(host, port, dbname, user, password)
 }
